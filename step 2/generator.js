@@ -1,58 +1,56 @@
-// class generator
-var Generator = {
-	
-	startButton: document.getElementById("button"),
-	dislpayArea: document.getElementById("quote-block"),
+// generator prototype
+var QuoteGenerator = function(wrapperId) {
+	this.wrapper = wrapperId;
+	this.startButton = document.getElementById(wrapperId).querySelector('.start-generation');
+	this.dislpayArea = document.getElementById(wrapperId).querySelector('.quote-generator-result');
 
-	randomNumber: function() {
+	this.updateValues = function updateValues() {
+		this.quoteNumber = document.getElementById("number").value;
+		this.subject = document.getElementById("subject").value;
+	};
+
+	this.randomNumber = function randomNumber() {
 		return Math.floor(Math.random() * 10);
-	},
+	};
 
-	cleanText: function() {
+	this.cleanText = function cleanText() {
 		this.dislpayArea.innerHTML = "";
-	},
+	};
 
-	displayQuote: function() {
+	this.generateQuote = function() {
+		if (this.subject == 'kaamelottQuote') {
+			var quote = '<p>"' + (kaamelottQuote.partOne[this.randomNumber()] + "" + kaamelottQuote.partTwo[this.randomNumber()] + "" + kaamelottQuote.partThree[this.randomNumber()]) + '"</p>'
+		} else {
+			var quote = '<p>"' + (classicQuote.partOne[this.randomNumber()] + "" + classicQuote.partTwo[this.randomNumber()] + "" + classicQuote.partThree[this.randomNumber()]) + '"</p>'
+		}
+		return quote;
+	};
+
+	this.displayQuote = function() {
 		this.startButton.addEventListener("click", function () {
-			var subject = document.getElementById("subject").value;
-			var quoteNumber = document.getElementById("number").value;
+			this.updateValues();
 			this.cleanText();
-			if (subject == "Kaamelott") {
-				var i = 1;
-				while (quoteNumber >= i) {
-					this.dislpayArea.innerHTML = '<p>"' + (kaamelottQuote.partOne[this.randomNumber ()] + "" + kaamelottQuote.partTwo[this.randomNumber ()] + "" + kaamelottQuote.partThree[this.randomNumber ()]) + '"</p>' + this.dislpayArea.innerHTML;
-					i++;
-				}
-			} else {
-				var i = 1;
-				while (quoteNumber >= i) {
-					this.dislpayArea.innerHTML = '<p>"' + (classicQuote.partOne[this.randomNumber ()] + "" + classicQuote.partTwo[this.randomNumber ()] + "" + classicQuote.partThree[this.randomNumber ()]) + '"</P>' + this.dislpayArea.innerHTML;
-					i++;
-				}
-			}
+			var i = 1;
+			while (this.quoteNumber >= i) {
+			this.dislpayArea.innerHTML = this.generateQuote() + this.dislpayArea.innerHTML;
+			i++;
+		};
 		}.bind(this));
-	},
+	};
 };
-//end of class generator
+//end of generator prototype
 
-// class quote
-var FakeQuote = {
-	partOne: [""],
-	partTwo: [""],
-	partThree: [""],
-
-	init: function (partOne, partTwo, partThree) {
-        this.partOne = partOne;
-        this.partTwo = partTwo;
-        this.partThree = partThree;
-    }
+// quote protoype
+var FakeQuote = function(partOne, partTwo, partThree){
+	this.partOne = partOne;
+	this.partTwo = partTwo;
+	this.partThree = partThree;
 };
-//end of class quote
+//end of quote prototype
 
-//creating objects :
-
-var kaamelottQuote = Object.create(FakeQuote);
-kaamelottQuote.init([
+//creating objects
+var generator = new QuoteGenerator('generator-box-1');
+var kaamelottQuote = new FakeQuote([
 	"On devient pas chef", 
 	"Nous on est Celtes", 
 	"Une fois j'ai dormi avec un porc", 
@@ -88,9 +86,7 @@ kaamelottQuote.init([
 	", hé ben, c'est pas gentil. Voila.",
 	". Bah je sais pas comment vous faites, moi je pourrais pas."
 ]);
-
-var classicQuote = Object.create(FakeQuote);
-classicQuote.init([
+var classicQuote = new FakeQuote([
 	"Dans la vie on ne fait pas ce que l'on veut", 
 	"La vie est un mystère qu'il faut vivre", 
 	"On passe une moitié de sa vie à attendre", 
@@ -126,6 +122,5 @@ classicQuote.init([
 	". Il n'y a que de mauvais cultivateurs.", 
 	". J'avais déjà du mal avec la main !"
 ]);
-
-var generator = Object.create(Generator);
+//starting the generator
 generator.displayQuote();
