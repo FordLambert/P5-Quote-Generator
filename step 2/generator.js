@@ -3,41 +3,42 @@ var QuoteGenerator = function(wrapperId) {
 	this.wrapper = wrapperId;
 	this.startButton = document.getElementById(wrapperId).querySelector('.start-generation');
 	this.dislpayArea = document.getElementById(wrapperId).querySelector('.quote-generator-result');
+};
 
-	this.updateValues = function updateValues() {
-		this.quoteNumber = document.getElementById("number").value;
-		this.subject = document.getElementById("subject").value;
-	};
+QuoteGenerator.prototype.updateValues = function updateValues() {
+	this.quoteNumber = document.getElementById("number").value;
+	this.subject = document.getElementById("subject").value;
+};
 
-	this.randomNumber = function randomNumber() {
-		return Math.floor(Math.random() * 10);
-	};
+QuoteGenerator.prototype.randomNumber = function randomNumber() {
+	return Math.floor(Math.random() * 10);
+};
 
-	this.cleanText = function cleanText() {
-		this.dislpayArea.innerHTML = "";
-	};
+QuoteGenerator.prototype.cleanText = function cleanText() {
+	this.dislpayArea.innerHTML = "";
+};
 
-	this.generateQuote = function() {
-		if (this.subject == 'kaamelottQuote') {
-			var quote = '<p>"' + (kaamelottQuote.partOne[this.randomNumber()] + "" + kaamelottQuote.partTwo[this.randomNumber()] + "" + kaamelottQuote.partThree[this.randomNumber()]) + '"</p>'
-		} else {
-			var quote = '<p>"' + (classicQuote.partOne[this.randomNumber()] + "" + classicQuote.partTwo[this.randomNumber()] + "" + classicQuote.partThree[this.randomNumber()]) + '"</p>'
-		}
-		return quote;
-	};
+QuoteGenerator.prototype.generateQuote = function() {
+	if (this.subject == 'kaamelottQuote') {
+		var quote = '<p>"' + (kaamelottQuote.partOne[this.randomNumber()] + "" + kaamelottQuote.partTwo[this.randomNumber()] + "" + kaamelottQuote.partThree[this.randomNumber()]) + '"</p>'
+	} else {
+		var quote = '<p>"' + (classicQuote.partOne[this.randomNumber()] + "" + classicQuote.partTwo[this.randomNumber()] + "" + classicQuote.partThree[this.randomNumber()]) + '"</p>'
+	}
+	return quote;
+};
 
-	this.displayQuote = function() {
-		this.startButton.addEventListener("click", function () {
-			this.updateValues();
-			this.cleanText();
-			var i = 1;
-			while (this.quoteNumber >= i) {
+QuoteGenerator.prototype.displayQuote = function() {
+	this.startButton.addEventListener("click", function () {
+		this.updateValues();
+		this.cleanText();
+		var i = 1;
+		while (this.quoteNumber >= i) {
 			this.dislpayArea.innerHTML = this.generateQuote() + this.dislpayArea.innerHTML;
 			i++;
 		};
-		}.bind(this));
-	};
+	}.bind(this));
 };
+
 //end of generator prototype
 
 // quote protoype

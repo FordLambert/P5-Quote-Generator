@@ -3,27 +3,28 @@ var QuoteGenerator = function(wrapperId) {
 	this.wrapper = wrapperId;
 	this.startButton = document.getElementById(wrapperId).querySelector('.start-generation');
 	this.dislpayArea = document.getElementById(wrapperId).querySelector('.quote-generator-result');
-
-	this.randomNumber = function randomNumber() {
-		return Math.floor(Math.random() * 10);
-	};
-
-	this.cleanText = function cleanText() {
-		this.dislpayArea.innerHTML = "";
-	};
-
-	this.generateQuote = function(quoteTable) {
-		var quote = '<p>"' + (quoteTable.partOne[this.randomNumber()] + "" + quoteTable.partTwo[this.randomNumber()] + "" + quoteTable.partThree[this.randomNumber()]) + '"</p>'
-		return quote;
-	};
-
-	this.displayQuote = function(quoteTable) {
-		this.startButton.addEventListener("click", function () {
-			this.cleanText();
-			this.dislpayArea.innerHTML = this.generateQuote(quoteTable);
-		}.bind(this));
-	};
 };
+
+QuoteGenerator.prototype.randomNumber = function randomNumber() {
+	return Math.floor(Math.random() * 10);
+};
+
+QuoteGenerator.prototype.cleanText = function cleanText() {
+	this.dislpayArea.innerHTML = "";
+};
+
+QuoteGenerator.prototype.generateQuote = function(quoteTable) {
+	var quote = '<p>"' + (quoteTable.partOne[this.randomNumber()] + "" + quoteTable.partTwo[this.randomNumber()] + "" + quoteTable.partThree[this.randomNumber()]) + '"</p>'
+	return quote;
+};
+
+QuoteGenerator.prototype.displayQuote = function(quoteTable) {
+	this.startButton.addEventListener("click", function () {
+		this.cleanText();
+		this.dislpayArea.innerHTML = this.generateQuote(quoteTable);
+	}.bind(this));
+};
+
 //end of generator prototype
 
 // quote protoype
