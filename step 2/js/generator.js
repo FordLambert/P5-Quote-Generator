@@ -1,8 +1,6 @@
 // generator prototype
-var QuoteGenerator = function(wrapperID, primaryQuoteFragment, secondaryQuoteFragment) {
+var QuoteGenerator = function(wrapperID) {
 	this.wrapper = document.getElementById(wrapperID);
-	this.primaryQuoteFragment = primaryQuoteFragment;
-	this.secondaryQuoteFragment = secondaryQuoteFragment;
 	this.startButton = this.wrapper.querySelector(this._selectors.startButton);
 	this.displayArea = this.wrapper.querySelector(this._selectors.resultWrapper);
 
@@ -17,7 +15,7 @@ QuoteGenerator.prototype._selectors = {
 
 QuoteGenerator.prototype.updateValues = function() {
 	this.quoteQuantities = this.wrapper.querySelector(this._selectors.quoteQuantities).value;
-	this.quoteSubject = this.wrapper.querySelector(this._selectors.quoteSubject).value;
+	this.quoteSubjectID = this.wrapper.querySelector(this._selectors.quoteSubject).value;
 };
 
 QuoteGenerator.prototype.randomNumber = function() {
@@ -33,15 +31,10 @@ QuoteGenerator.prototype.generateQuote = function() {
 	var middleQuoteIndex = this.randomNumber();
 	var endQuoteIndex = this.randomNumber();
 
-	if (this.quoteSubject == 'kaamelottQuote') {
-		var beginning = this.primaryQuoteFragment.beginnings[beginningQuoteIndex];
-		var middle = this.primaryQuoteFragment.middles[middleQuoteIndex];
-		var end = this.primaryQuoteFragment.ends[endQuoteIndex];
-	} else {
-		var beginning = this.secondaryQuoteFragment.beginnings[beginningQuoteIndex];
-		var middle = this.secondaryQuoteFragment.middles[middleQuoteIndex];
-		var end = this.secondaryQuoteFragment.ends[endQuoteIndex];
-	}
+	var beginning = quoteSamplesStore.get(this.quoteSubjectID).beginnings[beginningQuoteIndex];
+	var middle = quoteSamplesStore.get(this.quoteSubjectID).middles[middleQuoteIndex];
+	var end = quoteSamplesStore.get(this.quoteSubjectID).ends[endQuoteIndex];
+	
 	return new Quote(beginning, middle, end);
 };
 
