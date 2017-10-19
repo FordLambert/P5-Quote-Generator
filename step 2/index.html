@@ -15,8 +15,7 @@
 				<div>
 					<h1>Générateur de citations aléatoires</h1>
 					<select class="subject" name="subject">
-						<option value="0">Kaamelott</option>
-						<option value="1">Classique</option>
+					
 					</select>
 					<label for="number">Nombre de citations : </label>
 					<select class="number" name="number">
@@ -36,7 +35,8 @@
 		<script type="text/javascript" src="js/generator.js"></script>
 		<script type="text/javascript">
 			var quoteSamplesStore = new QuoteSamplesStore();
-			var kaamelottQuoteSamples = new QuoteSamples([
+			var kaamelottQuoteSamples = new QuoteSamples('Kaamelott', 
+			[
 				"On devient pas chef", 
 				"Nous on est Celtes", 
 				"Une fois j'ai dormi avec un porc", 
@@ -73,7 +73,8 @@
 				". Bah je sais pas comment vous faites, moi je pourrais pas."
 			]);
 			quoteSamplesStore.add(kaamelottQuoteSamples);
-			var classicQuoteSamples = new QuoteSamples([
+			var classicQuoteSamples = new QuoteSamples('Classique', 
+			[
 				"Dans la vie on ne fait pas ce que l'on veut", 
 				"La vie est un mystère qu'il faut vivre", 
 				"On passe une moitié de sa vie à attendre", 
@@ -110,7 +111,7 @@
 				". J'avais déjà du mal avec la main !"
 			]);
 			quoteSamplesStore.add(classicQuoteSamples);
-			var generator = new QuoteGenerator('generator-box-1');
+			var generator = new QuoteGenerator('generator-box-1', quoteSamplesStore);
 			generator.displayQuote();
 		</script>
 	</body>

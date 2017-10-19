@@ -1,4 +1,5 @@
-var QuoteSamples = function(beginnings, middles, ends){
+var QuoteSamples = function(name, beginnings, middles, ends){
+	this.name = name;
 	this.beginnings = beginnings;
 	this.middles = middles;
 	this.ends = ends;

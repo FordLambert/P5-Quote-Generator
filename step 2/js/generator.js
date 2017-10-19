@@ -1,9 +1,11 @@
 // generator prototype
-var QuoteGenerator = function(wrapperID) {
+var QuoteGenerator = function(wrapperID, quoteSamplesStore) {
+	this.quoteSamplesStore = quoteSamplesStore;
+	this.quoteSamplesList = this.quoteSamplesStore.quoteSamplesList;
 	this.wrapper = document.getElementById(wrapperID);
 	this.startButton = this.wrapper.querySelector(this._selectors.startButton);
 	this.displayArea = this.wrapper.querySelector(this._selectors.resultWrapper);
-
+	this.quoteSubjectList = this.wrapper.querySelector(this._selectors.quoteSubject);
 };
 
 QuoteGenerator.prototype._selectors = {
@@ -16,6 +18,17 @@ QuoteGenerator.prototype._selectors = {
 QuoteGenerator.prototype.updateValues = function() {
 	this.quoteQuantities = this.wrapper.querySelector(this._selectors.quoteQuantities).value;
 	this.quoteSubjectID = this.wrapper.querySelector(this._selectors.quoteSubject).value;
+};
+
+QuoteGenerator.prototype.subjectListCreation = function() {
+	var i = 0;
+	while (this.quoteSamplesList.length > i) {
+		var newSubject = document.createElement("option");
+		newSubject.text = this.quoteSamplesList[i].name;
+		newSubject.value = i;
+		this.quoteSubjectList.add(newSubject);
+		i++;
+	}
 };
 
 QuoteGenerator.prototype.randomNumber = function() {
@@ -31,14 +44,15 @@ QuoteGenerator.prototype.generateQuote = function() {
 	var middleQuoteIndex = this.randomNumber();
 	var endQuoteIndex = this.randomNumber();
 
-	var beginning = quoteSamplesStore.get(this.quoteSubjectID).beginnings[beginningQuoteIndex];
-	var middle = quoteSamplesStore.get(this.quoteSubjectID).middles[middleQuoteIndex];
-	var end = quoteSamplesStore.get(this.quoteSubjectID).ends[endQuoteIndex];
+	var beginning = this.quoteSamplesStore.get(this.quoteSubjectID).beginnings[beginningQuoteIndex];
+	var middle = this.quoteSamplesStore.get(this.quoteSubjectID).middles[middleQuoteIndex];
+	var end = this.quoteSamplesStore.get(this.quoteSubjectID).ends[endQuoteIndex];
 	
 	return new Quote(beginning, middle, end);
 };
 
 QuoteGenerator.prototype.displayQuote = function() {
+	this.subjectListCreation();
 	this.startButton.addEventListener('click', function () {
 		this.updateValues();
 		this.cleanText();
