@@ -1,4 +1,4 @@
-# Js-Generator
+P5 -Js-Generator
 
 This is the fifth project of my path with OpenClassroom (fourth was about UML, nothing to see on GitHub).
 
