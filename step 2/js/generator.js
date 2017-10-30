@@ -1,7 +1,6 @@
 // generator prototype
 var QuoteGenerator = function(wrapperID, quoteSamplesStore) {
 	this.quoteSamplesStore = quoteSamplesStore;
-	this.quoteSamplesList = this.quoteSamplesStore.quoteSamplesList;
 	this.wrapper = document.getElementById(wrapperID);
 	this.startButton = this.wrapper.querySelector(this._selectors.startButton);
 	this.displayArea = this.wrapper.querySelector(this._selectors.resultWrapper);
@@ -22,9 +21,9 @@ QuoteGenerator.prototype.updateValues = function() {
 
 QuoteGenerator.prototype.subjectListCreation = function() {
 	var i = 0;
-	while (this.quoteSamplesList.length > i) {
+	while (this.quoteSamplesStore.quoteSamplesList.length > i) {
 		var newSubject = document.createElement("option");
-		newSubject.text = this.quoteSamplesList[i].name;
+		newSubject.text = this.quoteSamplesStore.quoteSamplesList[i].name;
 		newSubject.value = i;
 		this.quoteSubjectList.add(newSubject);
 		i++;
