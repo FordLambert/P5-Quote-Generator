@@ -4,8 +4,8 @@ const QuoteGenerator = {
 		this._selectors = {
 			'startButton': '.start-generation',
 			'resultWrapper': '.quote-generator-result',
-			'quoteQuantities': '.number',
-			'quoteSubject': '.subject'
+			'quoteQuantities': '#number',
+			'quoteSubject': '#subject'
 		}
 
 		this.quoteSamplesStore = quoteSamplesStore;
