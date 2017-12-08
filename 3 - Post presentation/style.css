@@ -1,0 +1,29 @@
+body {
+	background-color: #1A3852;
+	
+}
+#generator-box-1 {
+	background-color: #457193;
+	border-radius: 10px;
+	border: 2px solid black;
+	margin-top: 10vh;
+	padding: 20px;
+}
+h1, p, select, button {
+	margin: 10px;
+}
+
+h1 {
+	color: #E9602A;
+	margin-top: 5vh;
+	margin-bottom: 5vh;
+}
+
+h2, a {
+	color: #E9602A;
+}
+
+p {
+	color: white;
+	font-size: 1.4em;
+}
