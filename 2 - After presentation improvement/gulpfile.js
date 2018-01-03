@@ -1,7 +1,11 @@
+'use strict';
+//Main files
 const gulp = require('gulp');
+//Transpiler
 const babel = require('gulp-babel');
+//Concat all files into one
 const concat = require('gulp-concat');
-const rename = require('gulp-rename');
+//Minified the code
 const uglify = require('gulp-uglify');
 
 gulp.task('optimize', function () {
